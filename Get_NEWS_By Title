@@ -1,0 +1,20 @@
+  public function getNewsByTitle(Request $req)
+    {
+        $title = $req->input('title');
+        try {
+            $news = News::where('title', 'like', "%{$title}%")->get();
+
+            return response()->json([
+                'status' => 'success',
+                'code' => 200,
+                'news' => $news
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'code' => 500,
+                'message' => 'Failed to fetch news by title',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
