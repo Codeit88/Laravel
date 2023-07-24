@@ -307,6 +307,148 @@
 				"url": "http://127.0.0.1:8000/api/v1/Show_qa"
 			},
 			"response": []
+		},
+		{
+			"name": "Search_Q/A",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "Recent added",
+							"type": "text"
+						},
+						{
+							"key": "media",
+							"type": "file",
+							"src": "/C:/Users/Sami/Desktop/download.jpeg"
+						},
+						{
+							"key": "descriptions",
+							"value": "dsadijsajdiusah yugdsayut dsagds ytfdstafd ysatdsa dafytsa tyds satdy f",
+							"type": "text"
+						},
+						{
+							"key": "tags",
+							"value": "sea map teg",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://127.0.0.1:8000/api/v1/create_articles",
+				"description": "Body params = id(1 or 2);"
+			},
+			"response": []
+		},
+		{
+			"name": "Show_Articals",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "fdsg",
+							"type": "text"
+						},
+						{
+							"key": "media",
+							"type": "file",
+							"src": "/C:/Users/Sami/Desktop/download.jpeg"
+						},
+						{
+							"key": "description",
+							"value": "dsadijsajdiusah yugdsayut dsagds ytfdstafd ysatdsa dafytsa tyds satdy f",
+							"type": "text"
+						},
+						{
+							"key": "tags",
+							"value": "sea map teg",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://127.0.0.1:8000/api/v1/show_articles"
+			},
+			"response": []
+		},
+		{
+			"name": "Send_Messages",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "fdsafdao",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "dsa@sdsa",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "dsa32145",
+							"type": "text"
+						},
+						{
+							"key": "message",
+							"value": "231dsalk3",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://127.0.0.1:8000/api/v1/send_message",
+				"description": "body params : name,email,phone,message"
+			},
+			"response": []
+		},
+		{
+			"name": "Provider_update business/details",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "fdsg",
+							"type": "text"
+						},
+						{
+							"key": "media",
+							"type": "file",
+							"src": "/C:/Users/Sami/Desktop/download.jpeg"
+						},
+						{
+							"key": "description",
+							"value": "dsadijsajdiusah yugdsayut dsagds ytfdstafd ysatdsa dafytsa tyds satdy f",
+							"type": "text"
+						},
+						{
+							"key": "tags",
+							"value": "sea map teg",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://127.0.0.1:8000/api/v1/update_buisness",
+				"description": "params are =['company_name',\r\n        'buisness_type',\r\n        'description',\r\n        'logo',\r\n        'loc_name',\r\n        'latitude',\r\n        'longitude',\r\n        'category_id',\r\n        'user_id',\r\n        'address',\r\n        'country',\r\n        'city',\r\n        'website_link']"
+			},
+			"response": []
 		}
 	]
 }
