@@ -1,0 +1,157 @@
+----/make sure to have a sql backend table for database or use migration command to make a new table
+
+
+///creating migration 
+
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('articals', function (Blueprint $table) {
+            $table->id();
+            $table->string('title')->nullable();
+            $table->string('media')->nullable();
+            $table->longText('description')->nullable();
+            $table->string('tags')->nullable();
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('articals');
+    }
+};
+
+
+--//////////////////////////////making model
+
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Articals extends Model
+{
+    use HasFactory;
+    protected $table = 'articals';
+    protected $fillable = ['title', 'media', 'description', 'tags'];
+}
+
+-----////////////////////////////////making controller
+
+<?php
+
+namespace App\Http\Controllers\api\v1;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use App\Models\Articals;
+use Illuminate\Support\Facades\Validator;
+
+class ArticalController extends Controller
+{
+    public function createArticle(Request $request)
+    {
+        $rules = [
+            'title' => 'required|string|max:255',
+            'media' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the max size as needed
+            'description' => 'required|string',
+            'tags' => 'required|string',
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'errors' => $validator->errors()->all()
+            ], 422);
+        }
+        $request->validate([]);
+
+        // If the validation passes, store the data in the $data array
+        $data = [
+            'title' => $request->title,
+            'media' => $request->media->store('/images/articals/', 'public'),
+            'description' => $request->description,
+            'tags' => $request->tags,
+        ];
+
+        try {
+            Articals::create($data);
+
+            // Return a success response
+            return response()->json(['message' => 'Article created successfully'], 201);
+        } catch (\Exception $e) {
+            // Return a failure response if an error occurs
+            return response()->json(['message' => $e->getMessage()], 500);
+        }
+    }
+
+
+
+    public function show()
+    {
+        try {
+            $articals = Articals::all();
+
+            return response()->json([
+                'status' => 'success',
+                'code' => 200,
+                'articals' => $articals
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'code' => 500,
+                'message' => 'Failed to fetch assossiation',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function search_artical(Request $request)
+    {
+        $title = $request->input('id');
+        try {
+            $artical = Articals::where('id', 'like', "%{$title}%")->get();
+
+            return response()->json([
+                'status' => 'success',
+                'code' => 200,
+                'artical' => $artical
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'code' => 500,
+                'message' => 'Failed to fetch trader by title',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
+}
+
+--////////////making endpoints/apis/routing
+
+
+Route::post('/create_articles', [ArticalController::class, 'createArticle']);
+Route::get('/show_articles', [ArticalController::class, 'show']);
+
+
+
+
