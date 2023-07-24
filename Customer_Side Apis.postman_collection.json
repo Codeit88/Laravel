@@ -1,0 +1,312 @@
+{
+	"info": {
+		"_postman_id": "b2ce73ad-3bc7-463c-a109-671df9cf0c23",
+		"name": "Customer_Side Apis",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "28153684"
+	},
+	"item": [
+		{
+			"name": "Create_Insurance",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": "http://127.0.0.1:8000/api/v1/create_insurance"
+			},
+			"response": []
+		},
+		{
+			"name": "news",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://127.0.0.1:8000/api/v1/news"
+			},
+			"response": []
+		},
+		{
+			"name": "Search_news",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/v1/search_news?title=loan",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"search_news"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "loan"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Show_Assossiations",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://127.0.0.1:8000/api/v1/show_assossiations"
+			},
+			"response": []
+		},
+		{
+			"name": "showGardeners",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "trade_name",
+							"value": "t3",
+							"type": "text"
+						},
+						{
+							"key": "trade_image",
+							"type": "file",
+							"src": "/C:/Users/Sami/Desktop/2.PNG",
+							"disabled": true
+						}
+					]
+				},
+				"url": "http://127.0.0.1:8000/api/v1/show_PopularLocalTraders"
+			},
+			"response": []
+		},
+		{
+			"name": "search_Gardeners",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "trade_name",
+							"value": "t1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/v1/search_Traders?title",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"search_Traders"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": null
+						}
+					]
+				},
+				"description": "trader_name(body_param)"
+			},
+			"response": []
+		},
+		{
+			"name": "Show_TrustedTraders",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "Name",
+							"value": "Saffg",
+							"type": "text"
+						},
+						{
+							"key": "Email",
+							"value": "F@dfds",
+							"type": "text"
+						},
+						{
+							"key": "Address",
+							"value": "dsa 443 das",
+							"type": "text"
+						},
+						{
+							"key": "Photo",
+							"type": "file",
+							"src": "/C:/Users/Sami/Desktop/download (1).jpeg"
+						},
+						{
+							"key": "SMS",
+							"value": "d5324",
+							"type": "text"
+						},
+						{
+							"key": "Call_Back",
+							"value": "43255",
+							"type": "text"
+						},
+						{
+							"key": "MembershipNo",
+							"value": "4DSAdsa",
+							"type": "text"
+						},
+						{
+							"key": "rating",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "number_of_reviews",
+							"value": "42",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://127.0.0.1:8000/api/v1/Show_TrustedTraders"
+			},
+			"response": []
+		},
+		{
+			"name": "Search_TrustedTraders",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "Name",
+							"value": "Sam",
+							"type": "text"
+						},
+						{
+							"key": "Email",
+							"value": "F@dfds",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "Address",
+							"value": "dsa 443 das",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "Photo",
+							"type": "file",
+							"src": "/C:/Users/Sami/Desktop/download (1).jpeg",
+							"disabled": true
+						},
+						{
+							"key": "SMS",
+							"value": "d5324",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "Call_Back",
+							"value": "43255",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "MembershipNo",
+							"value": "4DSAdsa",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "rating",
+							"value": "2",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "number_of_reviews",
+							"value": "42",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": "http://127.0.0.1:8000/api/v1/Search_TrustedTraders",
+				"description": "You have to pass body param(Name)"
+			},
+			"response": []
+		},
+		{
+			"name": "Contact_us Links",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://127.0.0.1:8000/api/v1/contact_us"
+			},
+			"response": []
+		},
+		{
+			"name": "Show_Q/A",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "question",
+							"value": "What is tRADE B",
+							"type": "text"
+						},
+						{
+							"key": "question_detail",
+							"value": "DSADSA",
+							"type": "text"
+						},
+						{
+							"key": "answer",
+							"value": "dsadsua h",
+							"type": "text"
+						},
+						{
+							"key": "media",
+							"value": "fb",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://127.0.0.1:8000/api/v1/Show_qa"
+			},
+			"response": []
+		}
+	]
+}
