@@ -1,0 +1,13 @@
+ if ($trader->isEmpty()) {
+            return response()->json([
+                'code' => 200,
+                'status' => 'success',
+                'traders_directory' => [],
+            ]); // HTTP status code 404 for not found
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'code' => 200,
+            'traders_directory' => $trader,
+        ], 200); // HTTP status code 200 for success
