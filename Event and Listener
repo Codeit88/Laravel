@@ -1,0 +1,168 @@
+------sendmail(event)
+<?php
+
+namespace App\Events;
+
+use Illuminate\Broadcasting\Channel;
+use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Broadcasting\PresenceChannel;
+use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
+
+class SendMAil
+{
+    use Dispatchable, InteractsWithSockets, SerializesModels;
+
+    /**
+     * Create a new event instance.
+     */
+    public $user_id;
+    public function __construct($user_id)
+    {
+        //
+        $this->user_id = $user_id;
+    }
+
+    /**
+     * Get the channels the event should broadcast on.
+     *
+     * @return array<int, \Illuminate\Broadcasting\Channel>
+     */
+    // public function broadcastOn(): array
+    // {
+    //     return [
+    //         new PrivateChannel('channel-name'),
+    //     ];
+    // }
+}
+
+
+--/////////////////////////getmail(listener)
+
+<?php
+
+namespace App\Listeners;
+
+use App\Events\SendMAil;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
+use App\Models\User;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\RegisterEmail;
+
+class GetMail
+{
+    /**
+     * Create the event listener.
+     */
+    public function __construct()
+    {
+    }
+
+    /**
+     * Handle the event.
+     */
+    public function handle(SendMAil $event): void
+    {
+        //
+        $user = User::find($event->user_id);
+        Mail::to($user->email)->send(new RegisterEmail($user));
+    }
+}
+
+
+--////////////////////////////registermail
+<?php
+
+namespace App\Mail;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Content;
+use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Queue\SerializesModels;
+
+class RegisterEmail extends Mailable
+{
+    use Queueable, SerializesModels;
+
+    public $user;
+
+    /**
+     * Create a new message instance.
+     */
+    public function __construct($user)
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * Get the message envelope.
+     */
+    public function envelope(): Envelope
+    {
+        return new Envelope(
+            subject: 'Welcome Email',
+        );
+    }
+
+    /**
+     * Get the message content definition.
+     */
+    public function content(): Content
+    {
+        return new Content(
+            markdown: 'mail.register-email',
+        );
+    }
+
+    /**
+     * Get the attachments for the message.
+     *
+     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
+     */
+    public function attachments(): array
+    {
+        return [];
+    }
+}
+
+
+---//////////////////////////////blade file
+<x-mail::message>
+# Welcome to {{ config('app.name') }}
+
+Hi {{ $user['name'] }}! This is you email verification link.
+<x-mail::button :url="''">
+Verify
+</x-mail::button>
+
+Thanks,<br>
+{{ config('app.name') }}
+</x-mail::message>
+
+
+
+----/////////////////servieprovider(regis)
+
+protected $listen = [
+        Registered::class => [
+            SendEmailVerificationNotification::class,
+        ],
+
+        \App\Events\SendMAil::class => [
+            \App\Listeners\GetMail::class,
+        ],
+
+
+
+
+    ];
+
+-----//////////////////calling api
+
+
+            event(new SendMAil($user->id));
